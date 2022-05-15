@@ -1,0 +1,153 @@
+
+<%- include('partials/header'); %>
+
+  <style>
+    .city-details {
+      background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../img/<%=photo%>.jpg);
+      background-size: 100%;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+    }
+    
+    @media only screen and (max-width: 75em) {
+      .city-details {
+        background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 65%, transparent 65%), url(../img/<%=photo%>.jpg);
+        background-size: cover;
+      }
+    }
+    
+    @media only screen and (max-width: 56.25em) {
+      .city-details {
+        background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.9)), to(rgba(255, 255, 255, 0.9))), url(../img/<%=photo%>.jpg);
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url(../img/<%=photo%>.jpg);
+      }          
+    }
+  </style>
+
+  <body>
+
+    <main>
+      <!-- *****  CITY INTRO SECTION  ***** -->
+      <section class="section-contact" style="padding-top: 2rem;">
+        <div class="nav">
+          <div class="header__logo-container">
+            <a href="/" class="btn-text" id="header__logo-text">Ariana Raheel</a>
+          </div>
+
+          <div>
+            <a href="/tours" class="btn-text btn-text__header">All Tours &rarr;</a>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 6rem;">
+          <div class="city-details">
+            <div class="contact__form">
+              <!-- <form action="#" class="form"> -->
+                <div class="u-margin-bottom-medium">
+                  <h2 class="heading-secondary"><%= cityName %></h2>
+                </div>
+                <div style="font-size: 1.5rem; text-align: justify;"><%= cityGeneralData %></div>
+              <!-- </form> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- *****  ABOUT SECTION  ***** -->
+      <section class="section-about" style="padding: 15rem 0;">
+        <div class="u-center-text u-margin-bottom-big">
+          <h2 class="heading-secondary">
+            Why Visit <%= cityName %>
+          </h2>
+        </div>
+
+        <div class="row">
+          <div class="col-1-of-2">
+            <h3 class="heading-tertiary u-margin-bottom-small">
+              You're going to fall in love with Kabul
+            </h3>
+            <p class="paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente
+              aspernatur libero repellat quis consequatur ducimus quam nisi exercitationem omnis
+              earum qui.
+            </p>
+
+            <div class="weather">
+              <div class="row weather-row">
+                <div class="col-2-of-5" style="margin-right: 2rem; margin-bottom: 2rem;">
+                  <h2 class="weather__city-name"><%= cityName %></h2>
+                  <span class="weather__date"><%= weather.day %></span>
+                </div>
+
+                <div class="col-1-of-5" style="margin-right: 2rem; margin-bottom: 2rem;">
+                  <span class="weather__temp"><%=weather.temp%> °C</span>
+                </div>
+
+                <div class="col-2-of-5">
+                  <p class="weather__feels-like"><span>feels like:</span> <%=weather.feelsLike%> °C</p>
+                  <p class="weather__description"><%=weather.description%></p>
+                </div>
+              </div>
+            </div>
+
+            <a href="#" class="btn btn--green bookNow" id="rzp-button1">Book now</a>
+            <a href="#" class="btn btn--green" id="view360">View 360 &rarr;</a>
+
+          </div>
+          <div class="col-1-of-2">
+              <div class="composition" style="margin-top: 5rem;">
+                  <img
+                    sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                    alt="Photo 1"
+                    class="composition__photo composition__photo--p1"
+                    src="/img/<%= cityName %>-1.jpg"
+                  />
+    
+                  <img
+                    sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                    alt="Photo 2"
+                    class="composition__photo composition__photo--p2"
+                    src="/img/<%= cityName %>-2.jpg"
+                  />
+    
+                  <img
+                    sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px"
+                    alt="Photo 3"
+                    class="composition__photo composition__photo--p3"
+                    src="/img/<%= cityName %>-3.jpg"
+                  />
+              </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      axios.post('/order').then((info) => {
+          console.log(info);
+          var options = {
+              "key": "rzp_test_TOfG2BL88Xvi1g", // Enter the Key ID generated from the Dashboard
+              "name": "Ariana Raheel",
+              "description": "Book Your Tour",
+              "image": "/img/ariana logo.jpg",
+              "order_id": info.data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+              "callback_url": "/payment/details",
+              "theme": {
+                  "color": "#55c57a"
+              }
+          };
+
+          var rzp1 = new Razorpay(options);
+          document.getElementById('rzp-button1').onclick = function(e){
+              rzp1.open();
+              e.preventDefault();
+          }
+      });
+    </script>
+
+    <!-- *****  FOOTER SECTION  ***** -->
+    
+    <%- include('partials/footer'); %>

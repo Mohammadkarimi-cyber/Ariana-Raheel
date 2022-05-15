@@ -1,0 +1,70 @@
+
+<%- include('partials/header'); %>
+
+<style>
+  body {
+    text-align: center;
+    padding: 4rem 0;
+    background: #EBF0F5;
+  }
+  i {
+    font-size: 20rem;
+    line-height: 20rem;
+  }
+  .card {
+    background: white;
+    padding: 5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+    height: auto;
+  }
+  table {
+    margin: 2rem auto;
+    text-align: center;
+    width: 90%;
+  }
+  table tr td {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+  .amount {
+    font-weight: 900;
+  }
+</style>
+<body>
+  <div class="card">
+    <div style="border-radius:20rem; width:20rem; height: auto; background: #F8FAF5; margin:0 auto;">
+      <i class="feature-box__icon">✓</i>
+    </div>
+    <h2 class="heading-secondary">Success</h2> 
+      <table>
+        <tr>
+          <td>Email:</td>
+          <td><%=paymentData.email%></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td><%=paymentData.contact%></td>
+        </tr>
+        <tr>
+          <td>Method:</td>
+          <td><%=paymentData.method%></td>
+        </tr>
+        <tr>
+          <td>Payment ID:</td>
+          <td><%=paymentData.order_id%></td>
+        </tr>
+        <tr class="amount">
+          <td>Amount:</td>
+          <td><%=paymentData.amount / 100%>$</td>
+        </tr>
+      </table>
+    <p class="paragraph">We advise to keep this details for future reference.</p>
+    <div class="u-center-text">
+      <a href="/" class="btn btn--green">Home</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+
+<%- include('partials/header'); %>
+
+  <body>
+    <header class="header">
+      <div class="nav">
+        <div class="header__logo-container">
+          <a href="/" class="btn-text" id="header__logo-text">Ariana Raheel</a>
+        </div>
+
+        <div>
+          <a href="#section-contact" class="btn-text btn-text__header">CONTACT US</a>
+        </div>
+      </div>
+
+      <div class="header__text-box">
+        <h1 class="heading-primary">
+          <span class="heading-primary--main">Outdoors</span>
+          <span class="heading-primary--sub">is where life happens</span>
+        </h1>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- *****  TOURS SECTION  ***** -->
+      <section class="section-tours" id="section-tours">
+        <div class="u-center-text u-margin-bottom-big">
+          <h2 class="heading-secondary">
+            Find your favourite destination
+          </h2>
+        </div>
+
+        <%details.forEach((detail) => {%>
+          <div class="row">
+            <%detail.forEach((city) => {%>
+              
+                <div class="col-1-of-3">
+                  <div class="card">
+                    <div class="card__side card__side--front">
+                      <div class="card__picture card__picture--<%=city.classNo%>">
+                        &nbsp;
+                      </div>
+                      <h4 class="card__heading">
+                        <span class="card__heading-span card__heading-span--<%=city.classNo%>"> <%=city.title%> </span>
+                      </h4>
+                      <div class="card__details">
+                        <ul>
+                          <li><%=city.days%></li>
+                          <li><%=city.people%></li>
+                          <li><%=city.guides%></li>
+                          <li><%=city.sleep%></li>
+                          <li><%=city.difficulty%></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="card__side card__side--back card__side--back-<%=city.classNo%>">
+                      <div class="card__cta">
+                        <div class="card__price-box">
+                          <p class="card__price-only">Only</p>
+                          <p class="card__price-value"><%=city.price%></p>
+                        </div>
+                        <a href="/tours/<%=city.name%>" class="btn btn--white">Discover more!</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+            <%});%>
+
+          </div>
+
+        <%})%>
+
+        <div class="row">
+          <%detailsTwo.forEach((city) => {%>
+            <div class="col-1-of-2">
+              <div class="card">
+                <div class="card__side card__side--front">
+                  <div class="card__picture card__picture--<%=city.classNo%>">
+                    &nbsp;
+                  </div>
+                  <h4 class="card__heading">
+                    <span class="card__heading-span card__heading-span--<%=city.classNo%>"> <%=city.title%> </span>
+                  </h4>
+                  <div class="card__details">
+                    <ul>
+                      <li><%=city.days%></li>
+                      <li><%=city.people%></li>
+                      <li><%=city.guides%></li>
+                      <li><%=city.sleep%></li>
+                      <li><%=city.difficulty%></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card__side card__side--back card__side--back-<%=city.classNo%>">
+                  <div class="card__cta">
+                    <div class="card__price-box">
+                      <p class="card__price-only">Only</p>
+                      <p class="card__price-value"><%=city.price%></p>
+                    </div>
+                    <a href="/tours/<%=city.name%>" class="btn btn--white">Discover more!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <%})%>
+        </div>
+
+      </section>
+
+      <!-- *****  CONTACT SECTION  ***** -->
+      <section class="section-contact" id="section-contact">
+        <div class="row">
+          <div class="contact">
+            <div class="contact__form">
+              <form action="/contact" method="post" class="form">
+                <div class="u-margin-bottom-medium">
+                  <h2 class="heading-secondary">
+                    Get in touch
+                  </h2>
+                </div>
+
+                <div class="form__group">
+                  <input
+                    type="text"
+                    name="fullName"
+                    class="form__input"
+                    placeholder="Full name"
+                    id="name"
+                    required
+                  />
+                  <label for="name" class="form__label">Full name</label>
+                </div>
+
+                <div class="form__group">
+                  <input
+                    type="email"
+                    name="email"
+                    class="form__input"
+                    placeholder="Email address"
+                    id="email"
+                    required
+                  />
+                  <label for="email" class="form__label">Email address</label>
+                </div>
+
+                <div class="form__group">
+                  <textarea name="msg" class="form__input  form__input-msg" id="msg" cols="30" rows="4" placeholder="Your Message" required></textarea>
+                  <label for="msg" class="form__label">Your Message</label>
+                </div>
+
+                <div class="form__group">
+                  <button type="submit" class="btn btn--green">Send &rarr;</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- *****  FOOTER SECTION  ***** -->
+
+    <%- include('partials/footer'); %>
